@@ -50,5 +50,4 @@ class Business : public Catalog{
 };
 
 void BLoad(vector<Business> &a){
-
 }
