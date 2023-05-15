@@ -1,6 +1,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <iostream>
 #include <sstream>
 using namespace std;
 
@@ -55,6 +56,21 @@ class Business : public Catalog{
     friend void CLoad(Business &a, string name);
     friend string createOrder(Business a, vector<string> ord);
     friend int calcOrder(Business a, vector<string> ord);
+    int printItems(){
+        int numberOfItems=0;
+        cout<<"Name:    Price:"<<endl;
+        for(int i=0;i<iname.size();i++){
+             cout<<iname[i]<<'\t'<<iprice[i]<<endl;
+             numberOfItems++;
+        }
+    };
+    vector<string> giveItemsNames(){
+        return iname;
+    }
+    vector<float> giveItemsPrice(){
+        return iprice;
+    }
+    
 };
 
 class Driver{
@@ -128,6 +144,13 @@ void CSave(Business &a, string name){
 
 void CLoad(Business &a,string name){
     ifstream inputFile(("catalogs\\"+name+".txt"));
+    // if(inputFile.is_open()){
+    //     while(geltine(inputFile,))
+    // }
+    // else{
+    //     std::cout<<"file not open!";
+    // }
+
 
     string line;
     while (getline(inputFile, line)) {
@@ -147,6 +170,7 @@ void BSave(vector<Business> &a){
     ofstream outputFile("businesses.txt");
     for (int i = 0; i <a.size(); ++i) {
         outputFile << a[i].name<<endl;
+        cout << a[i].name<<endl;
         CSave(a[i],a[i].name);
     }
 
@@ -236,6 +260,14 @@ void DLoad(Driver* a[], int &size) {
     inputFile.close();
 }
 
+int DFind(Driver* a[], int size, const string &targetName) {
+    for (int i = 0; i < size; i++) {
+        if (a[i]->name == targetName) {
+            return i;  // driver found, return index
+        }
+    }
+    return -1;  // driver not found
+}
 
 void removeLines(string filename, int numLinesToRemove) {
     ifstream inFile(filename);
@@ -259,7 +291,7 @@ void removeLines(string filename, int numLinesToRemove) {
     outFile.close();
 }
 
-void LoadOrders(vector<string> ord, Driver* a){
+void LoadOrders(vector<string> &ord, Driver* a){
     int seats = a->seatno();
     int i=0;
     ord.clear();
