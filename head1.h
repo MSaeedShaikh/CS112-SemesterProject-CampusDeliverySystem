@@ -135,7 +135,7 @@ void RemoveBusiness(string x, vector<Business> &a){
 
 
 void CSave(Business &a, string name){
-    ofstream outputFile(("catalogs\\"+name+".txt"));
+    ofstream outputFile((name+".txt"));
     for (size_t i = 0; i < a.iname.size(); i++) {
         outputFile << a.iname[i] << "," << a.iprice[i] << endl;
     }
@@ -143,14 +143,7 @@ void CSave(Business &a, string name){
 }
 
 void CLoad(Business &a,string name){
-    ifstream inputFile(("catalogs\\"+name+".txt"));
-    // if(inputFile.is_open()){
-    //     while(geltine(inputFile,))
-    // }
-    // else{
-    //     std::cout<<"file not open!";
-    // }
-
+    ifstream inputFile((name+".txt"));
 
     string line;
     while (getline(inputFile, line)) {
