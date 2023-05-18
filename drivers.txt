@@ -1,0 +1,2 @@
+arsal,dc123,0
+arsal2,kcd123,1

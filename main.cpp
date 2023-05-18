@@ -15,6 +15,9 @@ int main()
 {
     DLoad(d, D_no);
     BLoad(a);
+    // for(int i=0;i<a.size();i++){
+    //     std::cout<<a[i].printItems()<<endl;
+    // }
     mainMenu();
     BSave(a);
     DSave(d, D_no);
@@ -29,6 +32,7 @@ void mainMenu()
         cout << "1. Bussiness\n";
         cout << "2. Customer\n";
         cout << "3. Driver\n";
+        cout << "4. Exit\n";
         cin >> input;
         cin.ignore();
         switch (input)
@@ -42,13 +46,15 @@ void mainMenu()
         case 3:
             driverMenu();
             break;
+        case 4:
+        return;
         }
 
-            char ch;
+        char ch;
         cout<<"Do you want to go back to menu press y for yes\n";
         cin>>ch;
-
         if(ch=='y'|| ch=='Y'){
+            cin.clear();
             continue;
         }
         else{
@@ -69,10 +75,10 @@ void bussinessMenu()
 
         string name;
         cout << "Please enter the name of the business: ";
+        cin.ignore();
+        getline(cin, name);
         if (in == 'y' || in == 'Y')
         {
-            cin.ignore();
-            getline(cin, name);
             NewBusiness(name, a);
         }
 
@@ -152,13 +158,11 @@ void customerMenu()
 
     string name;
     cout << "Choose bussiness name of the business: ";
-    cin.ignore();
     getline(cin, name);
-    NewBusiness(name, a);
+
 
     int index;
     index = FindBusiness(name, a);
-
     if (index == -1)
     {
         cout << "No business found!\n";
@@ -166,6 +170,7 @@ void customerMenu()
     }
     else
     {
+        
         vector<string> orders;
         while (!exitFlag)
         {
@@ -179,14 +184,15 @@ void customerMenu()
                     cout << i + 1 << ": " << v_names[i] << '\t' << v_prices[i] << endl;
                 }
                 int itm;
-                cout << "Please enter the item you want!\n";
+                cout << "Please enter the item you want 1,2,3..!\n";
                 cin >> itm;
                 string order = v_names[itm - 1] + ',' + to_string(v_prices[itm - 1]);
                 orders.push_back(order);
 
-                cout << "Press 0 to exit" << endl;
-                cin >> itm;
-                if (!itm)
+                char choice;
+                cout << "Do you want to continue order? y/n: " << endl;
+                cin >> choice;
+                if (choice=='n' || choice=='N')
                 {
                     break;
                 }
