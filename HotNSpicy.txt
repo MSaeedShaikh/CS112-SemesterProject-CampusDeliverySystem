@@ -1,0 +1,3 @@
+burger,400
+sandwitch,350
+pizza,500

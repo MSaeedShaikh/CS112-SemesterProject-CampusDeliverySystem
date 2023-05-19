@@ -1,0 +1,3 @@
+pasta,340
+drink,80
+burger,300

@@ -137,13 +137,6 @@ void CSave(Business &a, string name){
 
 void CLoad(Business &a,string name){
     ifstream inputFile((name+".txt"));
-    // if(inputFile.is_open()){
-    //     while(geltine(inputFile,))
-    // }
-    // else{
-    //     std::cout<<"file not open!";
-    // }
-
 
     string line;
     while (getline(inputFile, line)) {
