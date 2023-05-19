@@ -56,15 +56,6 @@ class Business : public Catalog{
     friend void CLoad(Business &a, string name);
     friend string createOrder(Business a, vector<string> ord);
     friend int calcOrder(Business a, vector<string> ord);
-    int printItems(){
-        cout<<"Name: "<<name<<endl;
-        int numberOfItems=0;
-        cout<<"Name:    Price:"<<endl;
-        for(int i=0;i<iname.size();i++){
-             cout<<iname[i]<<'\t'<<iprice[i]<<endl;
-             numberOfItems++;
-        }
-    };
     vector<string> giveItemsNames(){
         return iname;
     }

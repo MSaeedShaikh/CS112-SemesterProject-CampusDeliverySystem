@@ -15,9 +15,6 @@ int main()
 {
     DLoad(d, D_no);
     BLoad(a);
-    // for(int i=0;i<a.size();i++){
-    //     std::cout<<a[i].printItems()<<endl;
-    // }
     mainMenu();
     BSave(a);
     DSave(d, D_no);
