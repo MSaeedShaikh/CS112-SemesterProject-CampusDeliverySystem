@@ -56,14 +56,6 @@ class Business : public Catalog{
     friend void CLoad(Business &a, string name);
     friend string createOrder(Business a, vector<string> ord);
     friend int calcOrder(Business a, vector<string> ord);
-    int printItems(){
-        int numberOfItems=0;
-        cout<<"Name:    Price:"<<endl;
-        for(int i=0;i<iname.size();i++){
-             cout<<iname[i]<<'\t'<<iprice[i]<<endl;
-             numberOfItems++;
-        }
-    };
     vector<string> giveItemsNames(){
         return iname;
     }
@@ -120,6 +112,7 @@ void NewBusiness(string x,vector<Business> &a){
 }
 
 int FindBusiness(string x, vector<Business> &a){
+
     for(int i=0; i<a.size(); i++){
         if(a[i].name==x){
             return i;
@@ -163,7 +156,6 @@ void BSave(vector<Business> &a){
     ofstream outputFile("businesses.txt");
     for (int i = 0; i <a.size(); ++i) {
         outputFile << a[i].name<<endl;
-        cout << a[i].name<<endl;
         CSave(a[i],a[i].name);
     }
 
@@ -196,7 +188,7 @@ int calcOrder(Business a, vector<string> ord){
 
 void SaveOrder(string order){
     ofstream outputFile("orders.txt", ios::app);
-    outputFile<<order;
+    outputFile<<order<<endl;
     outputFile.close();
 }
 
@@ -204,9 +196,11 @@ string createOrder(Business a, vector<string> ord){
     float sum = calcOrder(a, ord);
     string x = "Business: " + a.name +", Items: ";
     for(int i=0; i<ord.size(); i++){
-        x += ord[i] + "|";
+        x += ord[i];
+        if(i<ord.size()-1)
+         x+= "|";
     }
-    x += "\b, Price: "+to_string(sum);
+    x += ", Price: "+to_string(sum);
     SaveOrder(x);
     return x;
 }
@@ -290,7 +284,7 @@ void LoadOrders(vector<string> &ord, Driver* a){
     ord.clear();
     ifstream inputFile("orders.txt");
     string line;
-    while(getline(inputFile, line)||i==seats){
+    while(getline(inputFile, line)&&i!=seats){
         ord.push_back(line);
         i++;
     }
